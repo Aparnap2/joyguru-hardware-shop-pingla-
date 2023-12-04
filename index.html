@@ -310,87 +310,71 @@
         <p>&copy; 2023 joyguru Hardware Store</p>
     </footer>
 
-    <script>
-        gsap.registerPlugin(ScrollTrigger);
-        document.addEventListener("DOMContentLoaded", function () {
-            // Run your code here after the document is fully loaded
-            gsap.from(".product-card", {
-                scrollTrigger: {
-                    trigger: ".product-card",
-                    start: "top 80%",
-                    end: "bottom 20%",
-                    scrub: true,
-                },
-                opacity: 0,
-                y: 50,
-                stagger: 0.2,
-            });
+   <!-- ... (previous code) ... -->
 
-            gsap.from(".contact-form, .about-section, footer", {
-                scrollTrigger: {
-                    trigger: ".contact-form",
-                    start: "top 80%",
-                    end: "bottom 20%",
-                    scrub: true,
-                },
-                opacity: 0,
-                y: 50,
-            });
+<script>
+    gsap.registerPlugin(ScrollTrigger);
 
-            gsap.from(".landing", {
-                scrollTrigger: {
-                    trigger: ".landing",
-                    start: "top 80%",
-                    end: "bottom 20%",
-                    scrub: true,
-                },
-                opacity: 0,
-                y: 50,
-            });
-
-            gsap.from(".product-dropdown", {
-                scrollTrigger: {
-                    trigger: ".product-dropdown",
-                    start: "top 80%",
-                    end: "bottom 20%",
-                    scrub: true,
-                },
-                opacity: 0,
-                y: 50,
-            });
-
-            gsap.from(".nav-border", {
-                scrollTrigger: {
-                    trigger: "nav a",
-                    start: "top 80%",
-                    end: "bottom 20%",
-                    scrub: true,
-                },
-                width: 0,
-                stagger: 0.2,
-            });
+    document.addEventListener("DOMContentLoaded", function () {
+        // Run your code here after the document is fully loaded
+        gsap.from(".product-card", {
+            scrollTrigger: {
+                trigger: ".product-card",
+                start: "top 80%",
+                end: "bottom 20%",
+                scrub: true,
+            },
+            opacity: 0,
+            y: 50,
+            stagger: 0.2,
         });
 
-        function toggleDropdown() {
-    var dropdown = document.getElementById("product-dropdown");
-    dropdown.style.display === "none"
-        ? (dropdown.style.display = "flex")
-        : (dropdown.style.display = "none");
+        // Add your logic for other animations here...
 
-    // Add event listener to each dropdown option
-    var options = dropdown.getElementsByClassName("dropdown-option");
-    for (var i = 0; i < options.length; i++) {
-        options[i].addEventListener("click", function () {
-            var productId = this.getAttribute("data-product-id");
-            showProduct(productId);
+        gsap.from(".product-dropdown", {
+            scrollTrigger: {
+                trigger: ".product-dropdown",
+                start: "top 80%",
+                end: "bottom 20%",
+                scrub: true,
+            },
+            opacity: 0,
+            y: 50,
         });
+
+        // Dynamically create dropdown items based on product data
+        var productData = [
+            { id: 1, name: "Product 1" },
+            { id: 2, name: "Product 2" },
+            { id: 3, name: "Product 3" },
+            // Add more products as needed
+        ];
+
+        var dropdown = document.getElementById("product-dropdown");
+
+        productData.forEach(function (product) {
+            var link = document.createElement("a");
+            link.href = "#";
+            link.onclick = function () {
+                showProduct(product.id);
+            };
+            link.innerText = product.name;
+
+            dropdown.appendChild(link);
+        });
+    });
+
+    function toggleDropdown() {
+        var dropdown = document.getElementById("product-dropdown");
+        dropdown.style.display = dropdown.style.display === "none" ? "flex" : "none";
     }
-}
 
-function showProduct(productId) {
-    // Add logic to show specific product based on productId
-    console.log("Show Product: " + productId);
-}
-    </script>
+    function showProduct(productId) {
+        // Add your logic to show specific product based on productId
+        // For example, you can toggle the visibility of product cards
+        var productCard = document.getElementById("product-" + productId);
+        productCard.style.display = "block";
+    }
+</script>
 </body>
 </html>
